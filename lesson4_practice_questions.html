@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Security+ Lesson 4 – Practice Questions (Multiple Choice)</title>
+<style>
+  :root{
+    --ink:#1b1f2f; --muted:#4e566c; --accent:#2463eb; --line:#e2e6ef;
+  }
+  *{box-sizing:border-box}
+  body{margin:0; font:16px/1.55 "Segoe UI",Roboto,system-ui,-apple-system,Arial,sans-serif; color:var(--ink); background:#fff;}
+  header{padding:24px 20px 10px; border-bottom:1px solid var(--line);}
+  h1{margin:.2rem 0; font-size:1.4rem;}
+  .sub{color:var(--muted);}
+  .meta-grid{display:flex; gap:10px; flex-wrap:wrap; margin-top:.5rem;}
+  .pill{border:1px solid var(--line); border-radius:999px; padding:.2rem .6rem; color:var(--muted);}
+  main{max-width:900px; margin:0 auto; padding:18px 20px 40px;}
+  h2{font-size:1.1rem; color:var(--accent); margin:.3rem 0 .7rem;}
+  ol.qs{padding-left:1.2rem;}
+  .qs>li{margin:1rem 0;}
+  ol.opts{list-style-type: upper-alpha; padding-left:1.3rem; margin:.5rem 0 0;}
+  .card{border:1px solid var(--line); border-radius:12px; padding:16px; margin:16px 0;}
+  .akey{color:#0b6b2f; font-weight:600;}
+  @media print{
+    header{border:none;}
+    .card{page-break-inside: avoid;}
+  }
+</style>
+</head>
+<body>
+<header>
+  <div class="sub">CompTIA Security+ • Lesson 4</div>
+  <h1>Practice / Study Questions (Multiple Choice)</h1>
+  <div class="meta-grid">
+    <div class="pill">Topic: Identity and Access Management</div>
+    <div class="pill">15 Questions</div>
+    <div class="pill">Printable Format</div>
+  </div>
+</header>
+
+<main>
+  <section class="card">
+    <h2>Instructions</h2>
+    <p>Circle or mark the correct option for each question. Each item tests concepts from Lesson 4: Identity and Access Management (IAM), including SSO, federation, access controls, MFA, and AAA protocols.</p>
+  </section>
+
+  <section class="card">
+    <h2>Questions</h2>
+    <ol class="qs">
+      <li>Which access control model assigns permissions to job roles instead of individual users?
+        <ol class="opts">
+          <li>Discretionary Access Control (DAC)</li>
+          <li>Role-Based Access Control (RBAC)</li>
+          <li>Mandatory Access Control (MAC)</li>
+          <li>Rule-Based Access Control</li>
+        </ol>
+      </li>
+
+      <li>In a federated sign-in between Azure AD and Salesforce, Azure AD acts as the:
+        <ol class="opts">
+          <li>Service Provider</li>
+          <li>RADIUS Server</li>
+          <li>Identity Provider</li>
+          <li>Authorization Server within Salesforce</li>
+        </ol>
+      </li>
+
+      <li>Which protocol enables secure single sign-on between an identity provider and a service provider for web applications?
+        <ol class="opts">
+          <li>OAuth 2.0</li>
+          <li>SAML</li>
+          <li>RADIUS</li>
+          <li>Kerberos</li>
+        </ol>
+      </li>
+
+      <li>Which statement accurately describes OAuth 2.0?
+        <ol class="opts">
+          <li>A protocol used primarily for authentication</li>
+          <li>An authorization framework that allows resource access without sharing credentials</li>
+          <li>A replacement for SAML in enterprise SSO</li>
+          <li>A network protocol for device management</li>
+        </ol>
+      </li>
+
+      <li>Which option best defines OpenID Connect?
+        <ol class="opts">
+          <li>A stand-alone replacement for OAuth 2.0</li>
+          <li>An identity layer built on top of OAuth 2.0 to add authentication</li>
+          <li>A version of Kerberos used in Azure AD</li>
+          <li>A certificate enrollment mechanism</li>
+        </ol>
+      </li>
+
+      <li>Which step in the SAML authentication flow occurs first when a user attempts to access Salesforce through Azure AD SSO?
+        <ol class="opts">
+          <li>The Service Provider redirects the user to the Identity Provider</li>
+          <li>The Identity Provider validates credentials and issues a signed assertion</li>
+          <li>The Service Provider validates the assertion and grants access</li>
+          <li>The user initiates access to the Service Provider application</li>
+        </ol>
+      </li>
+
+      <li>Which Azure AD control helps enforce sign-in requirements based on location, device compliance, or risk level?
+        <ol class="opts">
+          <li>Password Complexity Policy</li>
+          <li>Conditional Access Policy</li>
+          <li>Account Lockout Threshold</li>
+          <li>Session Timeout Setting</li>
+        </ol>
+      </li>
+
+      <li>Which combination represents true multifactor authentication (MFA)?
+        <ol class="opts">
+          <li>Password and Username</li>
+          <li>Password and Security Question</li>
+          <li>Smart Card and Authenticator App Code</li>
+          <li>PIN and Password</li>
+        </ol>
+      </li>
+
+      <li>Which protocol provides centralized authentication and command authorization for managing network devices?
+        <ol class="opts">
+          <li>Kerberos</li>
+          <li>RADIUS</li>
+          <li>TACACS+</li>
+          <li>LDAP</li>
+        </ol>
+      </li>
+
+      <li>Which access control model evaluates multiple user and environmental attributes to make decisions dynamically?
+        <ol class="opts">
+          <li>Role-Based Access Control (RBAC)</li>
+          <li>Attribute-Based Access Control (ABAC)</li>
+          <li>Discretionary Access Control (DAC)</li>
+          <li>Mandatory Access Control (MAC)</li>
+        </ol>
+      </li>
+
+      <li>Which principle states that users should be granted only the minimum permissions required to perform their job duties?
+        <ol class="opts">
+          <li>Separation of Duties</li>
+          <li>Least Privilege</li>
+          <li>Defense in Depth</li>
+          <li>Zero Trust</li>
+        </ol>
+      </li>
+
+      <li>In which access control model can resource owners determine who can access their objects?
+        <ol class="opts">
+          <li>Discretionary Access Control (DAC)</li>
+          <li>Mandatory Access Control (MAC)</li>
+          <li>Role-Based Access Control (RBAC)</li>
+          <li>Attribute-Based Access Control (ABAC)</li>
+        </ol>
+      </li>
+
+      <li>Which method provides the strongest, most phishing-resistant second factor for administrator accounts?
+        <ol class="opts">
+          <li>SMS One-Time Code</li>
+          <li>Email Approval Link</li>
+          <li>Authenticator App Code (TOTP)</li>
+          <li>FIDO2 Hardware Security Key</li>
+        </ol>
+      </li>
+
+      <li>During an access review, some users still have rights to an app after changing departments. Which control corrects this?
+        <ol class="opts">
+          <li>Emergency Break-Glass Accounts</li>
+          <li>Role Recertification and Access Reviews</li>
+          <li>Shared Administrative Accounts</li>
+          <li>Extended Password Expiration Policy</li>
+        </ol>
+      </li>
+
+      <li>Which step should occur immediately after an employee leaves the company to maintain security?
+        <ol class="opts">
+          <li>Archive the user’s mailbox</li>
+          <li>Disable or delete the account and revoke access tokens</li>
+          <li>Wait 30 days before removing the user</li>
+          <li>Reset the password and keep the account active</li>
+        </ol>
+      </li>
+    </ol>
+  </section>
+
+  <section class="card">
+    <h2>Answer Key</h2>
+    <ol>
+      <li><span class="akey">B</span> Role-Based Access Control (RBAC)</li>
+      <li><span class="akey">C</span> Identity Provider</li>
+      <li><span class="akey">B</span> SAML</li>
+      <li><span class="akey">B</span> Authorization framework for delegated access</li>
+      <li><span class="akey">B</span> Identity layer that adds authentication to OAuth 2.0</li>
+      <li><span class="akey">D</span> User initiates access to the Service Provider</li>
+      <li><span class="akey">B</span> Conditional Access Policy</li>
+      <li><span class="akey">C</span> Smart Card and Authenticator App Code</li>
+      <li><span class="akey">C</span> TACACS+</li>
+      <li><span class="akey">B</span> Attribute-Based Access Control (ABAC)</li>
+      <li><span class="akey">B</span> Least Privilege</li>
+      <li><span class="akey">A</span> Discretionary Access Control (DAC)</li>
+      <li><span class="akey">D</span> FIDO2 Hardware Security Key</li>
+      <li><span class="akey">B</span> Role Recertification and Access Reviews</li>
+      <li><span class="akey">B</span> Disable or delete the account and revoke tokens</li>
+    </ol>
+  </section>
+</main>
+</body>
+</html>
