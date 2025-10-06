@@ -281,7 +281,7 @@
       {
         "task_id": 1,
         "type": "multiple_choice",
-        "prompt": "Based on the company’s goals, which of the following identity management designs best fits the requirements?",
+        "prompt": "KonaTech Solutions wants employees to access Slack, Salesforce, and Zoom using their Microsoft 365 credentials through Azure AD. Based on these goals, which identity management design best meets the company’s requirements?",
         "options": {"A": "Use local Active Directory accounts with NTLM authentication.","B": "Implement LDAP integration between Azure AD and each SaaS app individually.","C": "Configure SAML-based single sign-on (SSO) between Azure AD and the cloud apps.","D": "Use shared admin accounts with unique passwords for each application."},
         "answer": "C",
         "rationale": "SAML allows identity federation between Azure AD (as the identity provider) and third-party SaaS apps (as service providers), providing centralized authentication and MFA enforcement.",
@@ -294,7 +294,7 @@
       {
         "task_id": 2,
         "type": "ordering",
-        "prompt": "Arrange the following steps to show the correct order of a SAML authentication process:",
+        "prompt": "Arrange the following steps to show the correct order of the SAML authentication process when a KonaTech employee signs in to Salesforce using Azure AD single sign-on.",
         "steps": ["The user attempts to log in to Salesforce.","Salesforce redirects the user to Azure AD for authentication.","Azure AD validates the user’s credentials and issues a signed SAML assertion.","Salesforce validates the token and grants access."],
         "correct_order": [1,2,3,4]
       },
@@ -302,7 +302,7 @@
         "task_id": 3,
         "type": "fill_in_dropdown",
         "prompt": "Complete the sentence:",
-        "sentence": "In a federated login scenario, ______ is primarily used for authentication, while ______ is primarily used for authorization.",
+        "sentence": "In KonaTech’s Azure AD federated login setup, ______ is primarily responsible for authentication, while ______ manages delegated authorization to connected SaaS applications.",
         "blanks": [
           {"blank_id":"authn","choices":["OAuth 2.0","SAML","OpenID Connect","Kerberos"],"answer":"SAML",
            "feedback": {"OAuth 2.0":"OAuth handles delegated authorization, not primary authentication assertions.","OpenID Connect":"OIDC adds authentication to OAuth but question targets SAML vs OAuth.","Kerberos":"Kerberos is typical on-prem (AD), not public web federation here."}},
