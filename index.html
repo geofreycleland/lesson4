@@ -3,308 +3,255 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Lesson 4 PBQ — JSON-driven Webpage</title>
+  <title>PBQ Runner — Lesson 4</title>
   <style>
-  :root {
-    --bg: #f4f6fa;
-    --card: #ffffff;
-    --ink: #1b1f2f;
-    --ink-dim: #5c6373;
-    --accent: #2463eb;
-    --ok: #2ba84a;
-    --warn: #e0a106;
-    --err: #e63946;
-  }
+    :root {
+      --bg: #f4f6fa;
+      --card: #ffffff;
+      --ink: #1b1f2f;
+      --ink-dim: #5c6373;
+      --accent: #2463eb;
+      --ok: #2ba84a;
+      --warn: #e0a106;
+      --err: #e63946;
+    }
 
-  * { box-sizing: border-box; }
+    * { box-sizing: border-box; }
 
-  body {
-    margin: 0;
-    background: var(--bg);
-    color: var(--ink);
-    font: 16px/1.5 "Segoe UI", Roboto, system-ui, sans-serif;
-  }
+    body {
+      margin: 0;
+      background: var(--bg);
+      color: var(--ink);
+      font: 16px/1.5 "Segoe UI", Roboto, system-ui, sans-serif;
+    }
 
-  header {
-    padding: 20px 16px;
-    border-bottom: 1px solid #d7dce6;
-    background: #ffffff;
-    position: sticky;
-    top: 0;
-    z-index: 10;
-    box-shadow: 0 2px 8px rgba(0,0,0,0.05);
-  }
+    header {
+      padding: 20px 16px;
+      border-bottom: 1px solid #d7dce6;
+      background: #ffffff;
+      position: sticky;
+      top: 0;
+      z-index: 10;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+    }
 
-  h1 {
-    margin: 0.2rem 0;
-    font-size: 1.25rem;
-    font-weight: 600;
-  }
+    h1 {
+      margin: 0.2rem 0;
+      font-size: 1.25rem;
+      font-weight: 600;
+    }
 
-  main {
-    max-width: 900px;
-    margin: 32px auto;
-    padding: 0 16px;
-  }
+    main {
+      max-width: 900px;
+      margin: 32px auto;
+      padding: 0 16px;
+    }
 
-  .toolbar {
-    display: flex;
-    gap: 12px;
-    flex-wrap: wrap;
-    align-items: center;
-    margin: 0.75rem 0;
-  }
+    .toolbar {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 12px;
+      margin: 0.75rem 0;
+    }
 
-  .btn {
-    appearance: none;
-    border: 1px solid #c2c8d6;
-    background: #f8f9fb;
-    color: var(--ink);
-    padding: 0.55rem 0.9rem;
-    border-radius: 10px;
-    cursor: pointer;
-    font-weight: 500;
-    transition: all 0.15s ease-in-out;
-  }
+    .toolbar-left,
+    .toolbar-right {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      flex-wrap: wrap;
+    }
 
-  .btn:hover {
-    background: #eaf0ff;
-    border-color: var(--accent);
-  }
+    .btn {
+      appearance: none;
+      border: 1px solid #c2c8d6;
+      background: #f8f9fb;
+      color: var(--ink);
+      padding: 0.55rem 0.9rem;
+      height: 40px;
+      min-width: 130px;
+      border-radius: 10px;
+      cursor: pointer;
+      font-weight: 500;
+      line-height: 1.2;
+      text-align: center;
+      transition: all 0.15s ease-in-out;
+    }
 
-  .btn.primary {
-    background: var(--accent);
-    color: #fff;
-    border-color: var(--accent);
-  }
+    .btn:hover { background: #eaf0ff; border-color: var(--accent); }
+    .btn.primary { background: var(--accent); color: #fff; border-color: var(--accent); }
+    .btn.primary:hover { background: #1f56c4; }
 
-  .btn.primary:hover {
-    background: #1f56c4;
-  }
-
-  .pill {
-    display: inline-flex;
-    gap: 0.4rem;
-    align-items: center;
-    background: #eaf0ff;
-    padding: 0.35rem 0.75rem;
-    border-radius: 999px;
-    border: 1px solid #cbd6f5;
-    color: var(--accent);
-    font-size: 1.0rem;
-    font-weight: 600;
-  }
+    .pill {
+      display: inline-block;
+      padding: 0.5rem 1rem;
+      border-radius: 10px;
+      background: #f0f4ff;
+      border: 1px solid #c8d4fa;
+      color: var(--accent);
+      font-size: 1.1rem;
+      font-weight: 600;
+      letter-spacing: 0.2px;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.05);
+    }
 
 .pill2 {
-    display: inline-flex;
-    gap: 0.4rem;
-    align-items: center;
-    background: #eaf0ff;
-    padding: 0.25rem 0.60rem;
-    border-radius: 999px;
-    border: 1px solid #cbd6f5;
-    color: var(--accent);
-    font-size: 0.8rem;
-    font-weight: 600;
-  }
+      display: inline-block;
+      padding: 0.25rem 0.8rem;
+      border-radius: 10px;
+      background: #f0f4ff;
+      border: 1px solid #c8d4fa;
+      color: var(--accent);
+      font-size: 0.8rem;
+      font-weight: 600;
+      letter-spacing: 0.2px;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.05);
+    }
 
-  .card {
-    background: var(--card);
-    border: 1px solid #dfe3eb;
-    border-radius: 16px;
-    padding: 18px;
-    margin: 20px 0;
-    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.05);
-  }
+    .card {
+      background: var(--card);
+      border: 1px solid #dfe3eb;
+      border-radius: 16px;
+      padding: 18px;
+      margin: 20px 0;
+      box-shadow: 0 4px 16px rgba(0, 0, 0, 0.05);
+    }
 
-  .title { font-weight: 700; }
-  .muted { color: var(--ink-dim); }
-  .scenario { white-space: pre-wrap; color: #2b2f3c; }
+    .title { font-weight: 700; }
+    .muted { color: var(--ink-dim); }
+    .scenario { white-space: pre-wrap; color: #2b2f3c; }
 
-  .task { margin-top: 8px; }
-  .task h3 {
-    margin: 0.2rem 0 0.6rem;
-    font-size: 1.05rem;
-    color: var(--accent);
-  }
+    .task { margin-top: 8px; }
+    .task h3 {
+      margin: 0.2rem 0 0.6rem;
+      font-size: 1.05rem;
+      color: var(--accent);
+    }
 
-  .options { display: grid; gap: 0.4rem; }
+    .options { display: grid; gap: 0.4rem; }
 
-  label.option {
-    display: flex;
-    gap: 0.6rem;
-    align-items: flex-start;
-    padding: 0.5rem 0.7rem;
-    border: 1px solid #d6dae5;
-    border-radius: 10px;
-    background: #fafbfe;
-    transition: background 0.15s ease;
-  }
+    label.option {
+      display: flex;
+      gap: 0.6rem;
+      align-items: flex-start;
+      padding: 0.5rem 0.7rem;
+      border: 1px solid #d6dae5;
+      border-radius: 10px;
+      background: #fafbfe;
+      transition: background 0.15s ease;
+    }
+    label.option:hover { background: #eef3ff; }
 
-  label.option:hover {
-    background: #eef3ff;
-  }
+    .ordering { display: grid; gap: 0.5rem; }
 
-  .ordering { display: grid; gap: 0.5rem; }
+    .draggable {
+      padding: 0.6rem 0.7rem;
+      border: 1px dashed #b5bfd6;
+      border-radius: 10px;
+      background: #fafbfe;
+      cursor: grab;
+      transition: background 0.15s;
+    }
+    .draggable:hover { background: #eef3ff; }
+    .draggable.dragging { opacity: 0.8; border-style: solid; }
+    .draggable::before {
+      content: '⋮⋮';
+      color: #9aa8c0;
+      margin-right: 8px;
+      font-size: 14px;
+    }
 
-  .draggable {
-    padding: 0.6rem 0.7rem;
-    border: 1px dashed #b5bfd6;
-    border-radius: 10px;
-    background: #fafbfe;
-    cursor: grab;
-    transition: background 0.15s;
-  }
+    .result { margin-top: 10px; font-weight: 600; }
+    .correct { color: var(--ok); }
+    .incorrect { color: var(--err); }
 
-  .draggable:hover { background: #eef3ff; }
-  .draggable.dragging { opacity: 0.8; border-style: solid; }
+    .answer {
+      background: #f7f9ff;
+      border: 1px solid #d3daf4;
+      color: #2b2f3c;
+      padding: 0.6rem;
+      border-radius: 10px;
+      margin-top: 0.6rem;
+    }
 
-  .result { margin-top: 10px; font-weight: 600; }
-  .correct { color: var(--ok); }
-  .incorrect { color: var(--err); }
+    .feedback {
+      margin-top: 6px;
+      padding: 0.55rem 0.7rem;
+      border: 1px solid #f1c9cf;
+      background: #fff5f6;
+      color: #7a1e27;
+      border-radius: 8px;
+      font-size: 0.95rem;
+    }
 
-  .answer {
-    background: #f7f9ff;
-    border: 1px solid #d3daf4;
-    color: #2b2f3c;
-    padding: 0.6rem;
-    border-radius: 10px;
-    margin-top: 0.6rem;
-  }
+    details { margin-top: 0.5rem; }
 
-  details { margin-top: 0.5rem; }
+    footer {
+      max-width: 900px;
+      margin: 40px auto 80px;
+      padding: 0 16px;
+      color: #707789;
+      font-size: 0.9rem;
+      text-align: center;
+    }
 
-  footer {
-    max-width: 900px;
-    margin: 40px auto 80px;
-    padding: 0 16px;
-    color: #707789;
-    font-size: 0.9rem;
-    text-align: center;
-  }
+    code.json {
+      display: block;
+      white-space: pre;
+      overflow: auto;
+      max-height: 260px;
+      background: #f5f7fc;
+      border: 1px solid #dfe3eb;
+      padding: 10px;
+      border-radius: 12px;
+      color: #1b1f2f;
+    }
 
-  code.json {
-    display: block;
-    white-space: pre;
-    overflow: auto;
-    max-height: 260px;
-    background: #f5f7fc;
-    border: 1px solid #dfe3eb;
-    padding: 10px;
-    border-radius: 12px;
-    color: #1b1f2f;
-  }
+    .file { display: none; }
 
-  .file { display: none; }
+    select {
+      background: #ffffff;
+      color: var(--ink);
+      border: 1px solid #cbd2e0;
+      padding: 0.35rem 0.5rem;
+      border-radius: 8px;
+      margin: 0 0.35rem;
+    }
+    select:focus {
+      outline: none;
+      border-color: var(--accent);
+      box-shadow: 0 0 0 2px rgba(36, 99, 235, 0.2);
+    }
 
-  select {
-    background: #ffffff;
-    color: var(--ink);
-    border: 1px solid #cbd2e0;
-    padding: 0.35rem 0.5rem;
-    border-radius: 8px;
-    margin: 0 0.35rem;
-  }
-
-  select:focus {
-    outline: none;
-    border-color: var(--accent);
-    box-shadow: 0 0 0 2px rgba(36, 99, 235, 0.2);
-  }
-/* --- Toolbar layout --- */
-.toolbar {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  flex-wrap: wrap;
-  gap: 12px;
-  margin: 0.75rem 0;
-}
-
-.toolbar-left,
-.toolbar-right {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-}
-
-/* --- Uniform button styling --- */
-.btn {
-  appearance: none;
-  border: 1px solid #c2c8d6;
-  background: #f8f9fb;
-  color: var(--ink);
-  padding: 0.55rem 0.9rem;
-  height: 40px;
-  min-width: 130px;
-  border-radius: 10px;
-  cursor: pointer;
-  font-weight: 500;
-  line-height: 1.2;
-  text-align: center;
-  transition: all 0.15s ease-in-out;
-}
-
-.btn:hover {
-  background: #eaf0ff;
-  border-color: var(--accent);
-}
-
-.btn.primary {
-  background: var(--accent);
-  color: #fff;
-  border-color: var(--accent);
-}
-
-.btn.primary:hover {
-  background: #1f56c4;
-}
-
-/* File input hidden (use label as button) */
-.file {
-  display: none;
-}
-
-/* --- Small screens --- */
-@media (max-width: 640px) {
-  .toolbar {
-    flex-direction: column;
-    align-items: stretch;
-  }
-
-  .toolbar-left,
-  .toolbar-right {
-    flex-wrap: wrap;
-    justify-content: center;
-  }
-
-  .btn {
-    flex: 1 1 auto;
-    min-width: unset;
-  }
-}
-</style>
+    @media (max-width: 640px) {
+      .toolbar { flex-direction: column; align-items: stretch; }
+      .toolbar-left, .toolbar-right { justify-content: center; }
+      .btn { flex: 1 1 auto; min-width: unset; }
+    }
+  </style>
 </head>
 <body>
   <header>
-  <div class="pill">Lesson 4 • Implement Identity & Access Management</div>
+    <div class="pill">Lesson 4 • Implement Identity & Access Management</div>
 
-  <div class="toolbar">
-    <div class="toolbar-left">
-      <button class="btn" id="btnShowJson">Show JSON</button>
+    <div class="toolbar">
+      <div class="toolbar-left">
+        <button class="btn" id="btnShowJson">Show JSON</button>
 
-      <label class="btn" for="fileInput">Load JSON file…</label>
-      <input id="fileInput" class="file" type="file" accept="application/json" />
+        <label class="btn" for="fileInput">Load JSON file…</label>
+        <input id="fileInput" class="file" type="file" accept="application/json" />
 
-      <button class="btn" id="btnOriginal">Original PBQ</button>
+        <button class="btn" id="btnOriginal">Original PBQ</button>
+      </div>
+
+      <div class="toolbar-right">
+        <button class="btn" id="btnReset">Reset</button>
+        <button class="btn primary" id="btnCheck">Check Answers</button>
+      </div>
     </div>
-
-    <div class="toolbar-right">
-      <button class="btn" id="btnReset">Reset</button>
-      <button class="btn primary" id="btnCheck">Check Answers</button>
-    </div>
-  </div>
-</header>
+  </header>
   <main>
     <section class="card">
       <div class="title" id="pbq_title">—</div>
@@ -325,11 +272,11 @@
     Built for quick study-aid demos. Drop in your own PBQ JSON to render instantly.
   </footer>
 
-  <!-- Embedded default PBQ (you can replace or leave empty) -->
+  <!-- Embedded default PBQ -->
   <script type="application/json" id="pbq-data">{
     "pbq_title": "The Case of the Missing Login",
     "lesson": "Lesson 4 – Implement Identity and Access Management",
-    "scenario": "You’ve just been hired as a junior security administrator for KonaTech Solutions, a company that recently migrated from on-premises Active Directory to Azure AD. The CTO wants all employees to sign in to Slack, Salesforce, and Zoom using their Microsoft 365 credentials — no separate usernames or passwords. The company also wants to roll out multifactor authentication (MFA) to comply with its new cybersecurity insurance policy.",
+    "scenario": "You have recently joined KonaTech Solutions as a junior security administrator. The company has completed its migration from an on-premises Active Directory environment to Azure Active Directory (Azure AD). The Chief Technology Officer has directed the IT team to centralize authentication across several software as a service (SaaS) applications, specifically Slack, Salesforce, and Zoom, so that employees can sign in using their existing Microsoft 365 credentials. This initiative aims to simplify user management, improve the sign-in experience, and reduce password fatigue.\n\nIn addition, the organization must now comply with the multifactor authentication (MFA) standards required by its new cybersecurity insurance provider. You have been tasked with recommending and helping implement a secure identity federation strategy that integrates Azure AD with these cloud services. As part of this project, you will assess authentication protocols, evaluate single sign-on (SSO) configurations, and ensure that conditional access and MFA policies are applied consistently across all users and devices.\n\nYour recommendations must balance usability, scalability, and security while following best practices for identity and access management (IAM) in a modern hybrid cloud enterprise.",
     "tasks": [
       {
         "task_id": 1,
@@ -337,7 +284,12 @@
         "prompt": "Based on the company’s goals, which of the following identity management designs best fits the requirements?",
         "options": {"A": "Use local Active Directory accounts with NTLM authentication.","B": "Implement LDAP integration between Azure AD and each SaaS app individually.","C": "Configure SAML-based single sign-on (SSO) between Azure AD and the cloud apps.","D": "Use shared admin accounts with unique passwords for each application."},
         "answer": "C",
-        "rationale": "SAML allows identity federation between Azure AD (as the identity provider) and third-party SaaS apps (as service providers), providing centralized authentication and MFA enforcement."
+        "rationale": "SAML allows identity federation between Azure AD (as the identity provider) and third-party SaaS apps (as service providers), providing centralized authentication and MFA enforcement.",
+        "feedback": {
+          "A": "NTLM is legacy Windows auth; it won’t give you cloud SSO across SaaS.",
+          "B": "LDAP bindings to each SaaS app don’t solve federation; use SAML/OIDC.",
+          "D": "Shared accounts violate accountability and least privilege."
+        }
       },
       {
         "task_id": 2,
@@ -352,8 +304,10 @@
         "prompt": "Complete the sentence:",
         "sentence": "In a federated login scenario, ______ is primarily used for authentication, while ______ is primarily used for authorization.",
         "blanks": [
-          {"blank_id":"authn","choices":["OAuth 2.0","SAML","OpenID Connect","Kerberos"],"answer":"SAML"},
-          {"blank_id":"authz","choices":["OAuth 2.0","SAML","RADIUS","OpenID Connect"],"answer":"OAuth 2.0"}
+          {"blank_id":"authn","choices":["OAuth 2.0","SAML","OpenID Connect","Kerberos"],"answer":"SAML",
+           "feedback": {"OAuth 2.0":"OAuth handles delegated authorization, not primary authentication assertions.","OpenID Connect":"OIDC adds authentication to OAuth but question targets SAML vs OAuth.","Kerberos":"Kerberos is typical on-prem (AD), not public web federation here."}},
+          {"blank_id":"authz","choices":["OAuth 2.0","SAML","RADIUS","OpenID Connect"],"answer":"OAuth 2.0",
+           "feedback": {"SAML":"SAML issues authentication assertions; privileges/scopes are in OAuth.","RADIUS":"RADIUS is AAA for network devices, not delegated app authorization.","OpenID Connect":"OIDC focuses on authentication; authorization flows/scopes are OAuth."}}
         ],
         "rationale": "SAML provides authentication assertions; OAuth 2.0 provides delegated authorization."
       }
@@ -364,198 +318,419 @@
   }</script>
 
   <script>
-  const $ = (sel, el=document) => el.querySelector(sel);
-  const $$ = (sel, el=document) => Array.from(el.querySelectorAll(sel));
+/* tiny qs helpers */
+const $ = (sel, el=document) => el.querySelector(sel);
+const $$ = (sel, el=document) => Array.from(el.querySelectorAll(sel));
 
-  let PBQ = null;
-  let userAnswers = new Map();
+let PBQ = null;
+let userAnswers = new Map();
 
-  function loadPBQFromScriptTag(){
-    const demo = {
-      pbq_title: 'DEMO — Dropdown + MC + Order',
-      lesson: 'Lesson 4 – Implement Identity and Access Management',
-      scenario: 'Built-in demo PBQ. Includes MC, ordering, and dropdown.',
-      tasks: [
-        { task_id: 1, type: 'multiple_choice', prompt: 'Which protocol is commonly used for federated SSO between an IdP and SP?', options: {A:'RADIUS',B:'SAML',C:'SCP',D:'FTP'}, answer:'B', rationale:'SAML enables identity assertions between IdP and SP.' },
-        { task_id: 2, type: 'ordering', prompt: 'Arrange the SAML flow:', steps:[ 'User opens SP', 'SP redirects to IdP', 'IdP issues signed assertion', 'SP validates and grants access' ], correct_order:[1,2,3,4] },
-        { task_id: 3, type: 'fill_in_dropdown', prompt: 'Complete:', sentence: 'In this design, ______ provides authentication assertions, while ______ provides delegated authorization.', blanks:[ {blank_id:'b1', choices:['OAuth 2.0','SAML','Kerberos','RADIUS'], answer:'SAML'}, {blank_id:'b2', choices:['OAuth 2.0','SAML','OpenID Connect','TACACS+'], answer:'OAuth 2.0'} ], rationale: 'SAML for authn; OAuth 2.0 for authz.' }
-      ],
-      concepts_tested: ['SAML','OAuth 2.0','SSO'], difficulty: 'Easy', estimated_time_minutes: 6
-    };
+/* ---------- Loaders ---------- */
+async function loadPBQFromURLParam(){
+  const url = new URL(location.href);
+  const pbqFile = url.searchParams.get('pbq');
+  if(!pbqFile) return false;
+  try{
+    const res = await fetch(pbqFile, { cache: 'no-store' });
+    if(!res.ok) throw new Error(res.statusText);
+    PBQ = await res.json();
+    userAnswers.clear();
+    renderAll();
+    const panel = $('#jsonPanel'); if (panel) panel.hidden = false;
+    const out = $('#jsonOut'); if (out) out.textContent = JSON.stringify(PBQ, null, 2);
+    return true;
+  }catch(e){
+    console.error(e);
+    alert('Failed to load PBQ from URL: ' + e.message);
+    return false;
+  }
+}
 
-    try{
-      const tag = document.getElementById('pbq-data');
-      if(!tag || !tag.textContent.trim()) { PBQ = demo; renderAll(); return; }
-      PBQ = JSON.parse(tag.textContent);
-      renderAll();
-    }catch(err){
-      console.error('Embedded PBQ JSON parse failed:', err);
-      PBQ = demo; renderAll();
-      const panel = document.getElementById('jsonPanel'); if(panel) panel.hidden = false;
-      const out = document.getElementById('jsonOut'); if(out) out.textContent = JSON.stringify(PBQ, null, 2);
-      alert('Embedded PBQ JSON failed to load. Loaded demo PBQ instead.');
+function loadPBQFromScriptTag(){
+  const fallback = {
+    pbq_title: 'DEMO — Dropdown • MC • Order',
+    lesson: 'Lesson 4 – Implement Identity & Access Management',
+    scenario: 'Built-in demo PBQ. Includes MC, ordering, and dropdown.',
+    tasks: [
+      { task_id: 1, type: 'multiple_choice',
+        prompt: 'Which protocol is commonly used for federated SSO between an IdP and SP?',
+        options: {A:'RADIUS',B:'SAML',C:'SCP',D:'FTP'}, answer:'B',
+        rationale:'The IdP issues assertions the SP validates; SAML standardizes that.',
+        feedback: {A:'RADIUS is AAA to network gear, not web SSO.', C:'SCP is file copy.', D:'FTP is file transfer.'},
+        study_tip:'Sketch IdP ↔ SP and label who authenticates vs who validates.'
+      },
+      { task_id: 2, type: 'ordering',
+        prompt: 'Arrange the SAML flow:',
+        steps: ['User opens SP','SP redirects to IdP','IdP issues signed assertion','SP validates and grants access'],
+        correct_order: [1,2,3,4],
+        study_tip:'Think: SP → IdP → Assertion → Validate.'
+      },
+      { task_id: 3, type: 'fill_in_dropdown',
+        prompt: 'Complete:',
+        sentence: 'In this design, ______ provides authentication assertions, while ______ provides delegated authorization.',
+        blanks: [
+          {blank_id:'b1', choices:['OAuth 2.0','SAML','Kerberos','RADIUS'], answer:'SAML',
+           feedback:{'OAuth 2.0':'OAuth delegates access; not authn assertions.'},
+           study_tip:'Associate SAML with XML assertions and enterprise SSO.'},
+          {blank_id:'b2', choices:['OAuth 2.0','SAML','OpenID Connect','TACACS+'], answer:'OAuth 2.0',
+           feedback:{'SAML':'SAML is authn assertions; OAuth handles delegated access.'},
+           study_tip:'Remember: OAuth scopes/consent = delegated authorization.'}
+        ],
+        rationale:'SAML = authentication assertions; OAuth 2.0 = delegated authorization.'
+      }
+    ],
+    concepts_tested: ['SAML','OAuth 2.0','SSO'],
+    difficulty: 'Easy',
+    estimated_time_minutes: 6
+  };
+
+  try{
+    const tag = document.getElementById('pbq-data');
+    if(!tag || !tag.textContent.trim()){ PBQ = fallback; renderAll(); return; }
+    PBQ = JSON.parse(tag.textContent);
+    renderAll();
+  }catch(err){
+    console.error('Embedded PBQ JSON parse failed:', err);
+    PBQ = fallback; renderAll();
+    const panel = $('#jsonPanel'); if(panel) panel.hidden = false;
+    const out = $('#jsonOut'); if(out) out.textContent = JSON.stringify(PBQ, null, 2);
+    alert('Embedded PBQ JSON failed to load. Loaded demo PBQ instead.');
+  }
+}
+
+/* ---------- Renderer ---------- */
+function renderAll(){
+  $('#pbq_title').textContent = PBQ.pbq_title;
+  $('#lesson').textContent = PBQ.lesson;
+  $('#scenario').textContent = PBQ.scenario;
+  $('#meta').textContent = `${PBQ.difficulty} • ~${PBQ.estimated_time_minutes} min`;
+
+  const tasksWrap = $('#tasks');
+  tasksWrap.innerHTML = '';
+
+  PBQ.tasks.forEach(task => {
+    const card = document.createElement('section');
+    card.className = 'card task';
+    card.dataset.taskId = task.task_id;
+
+    const title = document.createElement('h3');
+    title.textContent = `Task ${task.task_id} — ${task.type.replace('_',' ')}`;
+    card.appendChild(title);
+
+    const prompt = document.createElement('p');
+    prompt.textContent = task.prompt;
+    card.appendChild(prompt);
+
+    if(task.type === 'multiple_choice'){
+      const opts = document.createElement('div');
+      opts.className = 'options';
+      Object.entries(task.options).forEach(([k,v])=>{
+        const id = `t${task.task_id}_${k}`;
+        const label = document.createElement('label');
+        label.className = 'option';
+        label.htmlFor = id;
+
+        const input = document.createElement('input');
+        input.type = 'radio';
+        input.name = `mc_${task.task_id}`;
+        input.id = id;
+        input.value = k;
+        input.addEventListener('change', ()=>{
+          userAnswers.set(task.task_id, {choice:k});
+        });
+
+        const span = document.createElement('span');
+        span.textContent = `${k}. ${v}`;
+
+        label.appendChild(input);
+        label.appendChild(span);
+        opts.appendChild(label);
+      });
+      card.appendChild(opts);
+
+      const result = document.createElement('div');
+      result.className = 'result';
+      card.appendChild(result);
+
+      const details = document.createElement('details');
+      const sum = document.createElement('summary'); sum.textContent = 'Rationale';
+      const ans = document.createElement('div'); ans.className = 'answer'; ans.textContent = task.rationale || '';
+      details.appendChild(sum); details.appendChild(ans);
+      details.hidden = true;             // hidden until wrong
+      card.appendChild(details);
     }
-  }
 
-  function renderAll(){
-    $('#pbq_title').textContent = PBQ.pbq_title;
-    $('#lesson').textContent = PBQ.lesson;
-    $('#scenario').textContent = PBQ.scenario;
-    $('#meta').textContent = `${PBQ.difficulty} • ~${PBQ.estimated_time_minutes} min`;
+    if(task.type === 'ordering'){
+      const list = document.createElement('div'); list.className = 'ordering';
+      task.steps.forEach((s, idx)=>{
+        const div = document.createElement('div');
+        div.className = 'draggable';
+        div.draggable = true;
+        div.dataset.index = idx+1;
+        div.textContent = s;             // no visible numbers
+        list.appendChild(div);
+      });
+      enableDrag(list, task.task_id);
+      card.appendChild(list);
 
-    const tasksWrap = $('#tasks');
-    tasksWrap.innerHTML = '';
-    PBQ.tasks.forEach(task => {
-      const card = document.createElement('section');
-      card.className = 'card task';
-      card.dataset.taskId = task.task_id;
+      const result = document.createElement('div'); result.className = 'result'; card.appendChild(result);
 
-      const title = document.createElement('h3');
-      title.textContent = `Task ${task.task_id} — ${task.type.replace('_',' ')}`;
-      card.appendChild(title);
+      const details = document.createElement('details');
+      const sum = document.createElement('summary'); sum.textContent = 'Rationale';
+      const ans = document.createElement('div'); ans.className = 'answer';
+      ans.textContent = task.correct_order.map(i=>task.steps[i-1]).join(' → ');
+      details.appendChild(sum); details.appendChild(ans);
+      details.hidden = true;             // hidden until wrong
+      card.appendChild(details);
+    }
 
-      const prompt = document.createElement('p');
-      prompt.textContent = task.prompt;
-      card.appendChild(prompt);
+    if(task.type === 'fill_in_dropdown'){
+      const p = document.createElement('p');
+      const parts = (task.sentence||'').split('______');
+      parts.forEach((text, idx)=>{
+        p.append(text);
+        if(idx < (task.blanks||[]).length){
+          const sel = document.createElement('select');
+          sel.dataset.blankId = task.blanks[idx].blank_id;
+          const ph = document.createElement('option'); ph.value=''; ph.textContent='— select —'; ph.disabled=true; ph.selected=true; sel.appendChild(ph);
+          task.blanks[idx].choices.forEach(choice=>{
+            const opt = document.createElement('option');
+            opt.value = choice; opt.textContent = choice;
+            sel.appendChild(opt);
+          });
+          sel.addEventListener('change', ()=>{
+            const current = userAnswers.get(task.task_id) || {};
+            current[task.blanks[idx].blank_id] = sel.value;
+            userAnswers.set(task.task_id, current);
+          });
+          p.append(sel);
+        }
+      });
+      card.appendChild(p);
 
-      if(task.type === 'multiple_choice'){
-        const opts = document.createElement('div');
-        opts.className = 'options';
-        Object.entries(task.options).forEach(([k,v])=>{
-          const id = `t${task.task_id}_${k}`;
-          const label = document.createElement('label');
-          label.className = 'option';
-          label.htmlFor = id;
-          const input = document.createElement('input');
-          input.type = 'radio'; input.name = `mc_${task.task_id}`; input.id = id; input.value = k;
-          input.addEventListener('change', ()=>{ userAnswers.set(task.task_id, {choice:k}); });
-          const span = document.createElement('span'); span.textContent = `${k}. ${v}`;
-          label.appendChild(input); label.appendChild(span);
-          opts.appendChild(label);
-        });
-        card.appendChild(opts);
+      const result = document.createElement('div'); result.className = 'result'; card.appendChild(result);
 
-        const result = document.createElement('div'); result.className = 'result'; card.appendChild(result);
+      const details = document.createElement('details');
+      const sum = document.createElement('summary'); sum.textContent = 'Rationale';
+      const ans = document.createElement('div'); ans.className = 'answer'; ans.textContent = task.rationale || '';
+      details.appendChild(sum); details.appendChild(ans);
+      details.hidden = true;             // hidden until wrong
+      card.appendChild(details);
+    }
 
-        const details = document.createElement('details'); const sum = document.createElement('summary'); sum.textContent = 'Rationale';
-        const ans = document.createElement('div'); ans.className = 'answer'; ans.textContent = task.rationale || '';
-        details.appendChild(sum); details.appendChild(ans); card.appendChild(details);
-      }
-
-      if(task.type === 'ordering'){
-        const list = document.createElement('div'); list.className = 'ordering';
-        task.steps.forEach((s, idx)=>{
-          const div = document.createElement('div');
-          div.className = 'draggable'; div.draggable = true; div.dataset.index = idx+1; div.textContent = s;
-          list.appendChild(div);
-        });
-        enableDrag(list, task.task_id); card.appendChild(list);
-        const result = document.createElement('div'); result.className = 'result'; card.appendChild(result);
-        const details = document.createElement('details'); const sum=document.createElement('summary'); sum.textContent='Show Correct Order';
-        const ans=document.createElement('div'); ans.className='answer'; ans.textContent = task.correct_order.join(' → ');
-        details.appendChild(sum); details.appendChild(ans); card.appendChild(details);
-      }
-
-      if(task.type === 'fill_in_dropdown'){
-        const p = document.createElement('p');
-        const parts = (task.sentence||'').split('______');
-        parts.forEach((text, idx)=>{
-          p.append(text);
-          if(idx < (task.blanks||[]).length){
-            const sel = document.createElement('select'); sel.dataset.blankId = task.blanks[idx].blank_id;
-            const ph = document.createElement('option'); ph.value=''; ph.textContent='— select —'; ph.disabled=true; ph.selected=true; sel.appendChild(ph);
-            task.blanks[idx].choices.forEach(choice=>{ const opt=document.createElement('option'); opt.value=choice; opt.textContent=choice; sel.appendChild(opt); });
-            sel.addEventListener('change', ()=>{
-              const current = userAnswers.get(task.task_id) || {}; current[task.blanks[idx].blank_id] = sel.value; userAnswers.set(task.task_id, current);
-            });
-            p.append(sel);
-          }
-        });
-        card.appendChild(p);
-        const result = document.createElement('div'); result.className='result'; card.appendChild(result);
-        const details = document.createElement('details'); const sum=document.createElement('summary'); sum.textContent='Rationale';
-        const ans=document.createElement('div'); ans.className='answer'; ans.textContent = task.rationale || '';
-        details.appendChild(sum); details.appendChild(ans); card.appendChild(details);
-      }
-
-      tasksWrap.appendChild(card);
-    });
-
-    $('#jsonOut').textContent = JSON.stringify(PBQ, null, 2);
-  }
-
-  function enableDrag(container, taskId){
-    let dragEl = null;
-    container.addEventListener('dragstart', e=>{
-      if(e.target.classList.contains('draggable')){ dragEl = e.target; e.dataTransfer.effectAllowed='move'; e.target.classList.add('dragging'); }
-    });
-    container.addEventListener('dragend', e=>{
-      if(dragEl){ dragEl.classList.remove('dragging'); dragEl = null; }
-      const order = $$('.draggable', container).map(d=>Number(d.dataset.index));
-      userAnswers.set(taskId, {order});
-    });
-    container.addEventListener('dragover', e=>{
-      e.preventDefault();
-      const after = getDragAfterElement(container, e.clientY);
-      const dragging = $('.draggable.dragging', container);
-      if(!dragging) return;
-      if(after == null){ container.appendChild(dragging); } else { container.insertBefore(dragging, after); }
-    });
-  }
-  function getDragAfterElement(container, y){
-    const els = $$('.draggable:not(.dragging)', container);
-    let closest = {offset: Number.NEGATIVE_INFINITY, element: null};
-    els.forEach(el=>{ const box = el.getBoundingClientRect(); const offset = y - box.top - box.height/2; if(offset < 0 && offset > closest.offset){ closest = {offset, element: el}; }});
-    return closest.element;
-  }
-
-  function checkAnswers(){
-    PBQ.tasks.forEach(task=>{
-      const card = document.querySelector(`.task[data-task-id="${task.task_id}"]`);
-      const result = $('.result', card); result.textContent = '';
-
-      if(task.type === 'multiple_choice'){
-        const user = userAnswers.get(task.task_id)?.choice;
-        if(!user){ result.textContent = 'No answer selected.'; result.className = 'result incorrect'; return; }
-        const ok = user === task.answer;
-        result.textContent = ok ? `Correct ✓ (${user})` : `Incorrect ✗ (you chose ${user}, correct is ${task.answer})`;
-        result.className = 'result ' + (ok? 'correct':'incorrect');
-      }
-
-      if(task.type === 'ordering'){
-        let order = userAnswers.get(task.task_id)?.order;
-        if(!order){ const list = $('.ordering', card); order = $$('.draggable', list).map(d=>Number(d.dataset.index)); }
-        const ok = JSON.stringify(order) === JSON.stringify(task.correct_order);
-        result.textContent = ok ? `Correct order ✓ (${order.join(' → ')})` : `Incorrect order ✗ (yours: ${order.join(' → ')}, expected: ${task.correct_order.join(' → ')})`;
-        result.className = 'result ' + (ok? 'correct':'incorrect');
-      }
-
-      if(task.type === 'fill_in_dropdown'){
-        let answers = userAnswers.get(task.task_id);
-        if(!answers){ answers = {}; const selects = $$('select[data-blank-id]', card); selects.forEach(s=> answers[s.dataset.blankId] = s.value); }
-        let allAnswered = true; let ok = true;
-        (task.blanks||[]).forEach(b=>{ const v = answers[b.blank_id]; if(!v){ allAnswered=false; ok=false; } else if(v !== b.answer){ ok=false; } });
-        if(!allAnswered){ result.textContent = 'Complete all blanks.'; result.className = 'result incorrect'; }
-        else { result.textContent = ok ? 'Correct ✓' : 'Incorrect ✗'; result.className = 'result ' + (ok? 'correct':'incorrect'); }
-      }
-    });
-  }
-
-  function resetAll(){ userAnswers.clear(); renderAll(); }
-
-  // Event listeners (safe)
-  document.getElementById('btnShowJson')?.addEventListener('click', ()=>{ const panel = document.getElementById('jsonPanel'); if(panel) panel.hidden = !panel.hidden; });
-  document.getElementById('btnDemo')?.addEventListener('click', ()=>{ loadPBQFromScriptTag(); });
-  document.getElementById('btnCheck')?.addEventListener('click', checkAnswers);
-  document.getElementById('btnReset')?.addEventListener('click', resetAll);
-  document.getElementById('fileInput')?.addEventListener('change', async (e)=>{
-    const file = e.target.files?.[0]; if(!file) return;
-    try{ const text = await file.text(); PBQ = JSON.parse(text); userAnswers.clear(); renderAll(); $('#jsonPanel').hidden = false; $('#jsonOut').textContent = JSON.stringify(PBQ, null, 2); }
-    catch(err){ alert('Failed to parse JSON: ' + err.message); }
+    tasksWrap.appendChild(card);
   });
 
-  // Boot
-  loadPBQFromScriptTag();
-  </script>
+  $('#jsonOut').textContent = JSON.stringify(PBQ, null, 2);
+}
+
+/* ---------- Drag + order helpers ---------- */
+function enableDrag(container, taskId){
+  let dragEl = null;
+  container.addEventListener('dragstart', e=>{
+    if(e.target.classList.contains('draggable')){
+      dragEl = e.target;
+      e.dataTransfer.effectAllowed='move';
+      e.target.classList.add('dragging');
+    }
+  });
+  container.addEventListener('dragend', ()=>{
+    if(dragEl){ dragEl.classList.remove('dragging'); dragEl = null; }
+    const order = $$('.draggable', container).map(d=>Number(d.dataset.index));
+    userAnswers.set(taskId, {order});
+  });
+  container.addEventListener('dragover', e=>{
+    e.preventDefault();
+    const after = getDragAfterElement(container, e.clientY);
+    const dragging = $('.draggable.dragging', container);
+    if(!dragging) return;
+    if(after == null){ container.appendChild(dragging); }
+    else { container.insertBefore(dragging, after); }
+  });
+}
+function getDragAfterElement(container, y){
+  const els = $$('.draggable:not(.dragging)', container);
+  let closest = {offset: Number.NEGATIVE_INFINITY, element: null};
+  els.forEach(el=>{
+    const box = el.getBoundingClientRect();
+    const offset = y - box.top - box.height/2;
+    if(offset < 0 && offset > closest.offset){ closest = {offset, element: el}; }
+  });
+  return closest.element;
+}
+
+/* ---------- Feedback helpers ---------- */
+function orderingHint(order, answer, steps){
+  const pos = new Map();
+  answer.forEach((v, i) => pos.set(v, i));
+  for (let i = 0; i < order.length - 1; i++){
+    if (pos.get(order[i]) > pos.get(order[i+1])){
+      const a = order[i], b = order[i+1];
+      return `Hint: “${steps[a-1]}” should come before “${steps[b-1]}”.`;
+    }
+  }
+  return 'Hint: Check the trust sequence and who issues vs who validates the assertion.';
+}
+function summarizeInline(order, steps){
+  const clip = s => s.replace(/\s+/g,' ').trim().slice(0, 48) + (s.length > 48 ? '…' : '');
+  return order.map(i => clip(steps[i-1])).join(' → ');
+}
+function setFeedback(card, text){
+  let fb = card.querySelector('.feedback');
+  if(!fb){
+    fb = document.createElement('div');
+    fb.className = 'feedback';
+    card.appendChild(fb);
+  }
+  fb.textContent = text || '';
+  fb.hidden = !text;
+}
+function buildDeepFeedback({primary, why, tip}){
+  const parts = [];
+  if(primary) parts.push(primary);
+  if(why) parts.push(`Why: ${why}`);
+  if(tip) parts.push(`Study tip: ${tip}`);
+  return parts.join(' ');
+}
+
+/* ---------- Grading ---------- */
+function checkAnswers(){
+  PBQ.tasks.forEach(task=>{
+    const card = document.querySelector(`.task[data-task-id="${task.task_id}"]`);
+    const result = $('.result', card);
+    const details = $('details', card);
+    if(result) result.textContent = '';
+    if(details) details.hidden = true;
+    setFeedback(card, '');
+
+    if(task.type === 'multiple_choice'){
+      const user = userAnswers.get(task.task_id)?.choice;
+      if(!user){
+        result.textContent = 'No answer selected.';
+        result.className = 'result incorrect';
+        setFeedback(card, 'Choose an option to see feedback.');
+        return;
+      }
+      const ok = user === task.answer;
+      result.textContent = ok ? `Correct ✓ (${user})` : `Incorrect ✗ (you chose ${user})`;
+      result.className = 'result ' + (ok ? 'correct' : 'incorrect');
+
+      if(!ok){
+        const primary = task.feedback?.[user] || 'That option doesn’t match the federation model described.';
+        const why = task.rationale || 'The IdP issues assertions that the SP validates; SAML standardizes that exchange.';
+        const tip = task.study_tip || 'Sketch the IdP ↔ SP flow and label who authenticates vs who authorizes.';
+        setFeedback(card, buildDeepFeedback({primary, why, tip}));
+        if(details){ details.hidden = false; details.open = false; }
+      }
+      return;
+    }
+
+    if(task.type === 'ordering'){
+      let order = userAnswers.get(task.task_id)?.order;
+      if(!order){
+        const list = $('.ordering', card);
+        order = $$('.draggable', list).map(d=>Number(d.dataset.index));
+      }
+      const ok = JSON.stringify(order) === JSON.stringify(task.correct_order);
+      const yours = summarizeInline(order, task.steps);
+      const expected = summarizeInline(task.correct_order, task.steps);
+
+      result.textContent = ok ? 'Correct order ✓' : 'Incorrect order ✗';
+      result.className = 'result ' + (ok ? 'correct' : 'incorrect');
+
+      if(!ok){
+        const primary = orderingHint(order, task.correct_order, task.steps);
+        const why = `Expected: ${expected}. Yours: ${yours}.`;
+        const tip = task.study_tip || 'Think: SP redirects to IdP → IdP issues assertion → SP validates → access.';
+        setFeedback(card, buildDeepFeedback({primary, why, tip}));
+        if(details){
+          const ans = details.querySelector('.answer');
+          if(ans) ans.textContent = expected;
+          details.hidden = false; details.open = false;
+        }
+      }
+      return;
+    }
+
+    if(task.type === 'fill_in_dropdown'){
+      let answers = userAnswers.get(task.task_id);
+      if(!answers){
+        answers = {};
+        const selects = $$('select[data-blank-id]', card);
+        selects.forEach(s => answers[s.dataset.blankId] = s.value);
+      }
+      let allAnswered = true;
+      let ok = true;
+      const msgs = [];
+
+      (task.blanks || []).forEach(b => {
+        const v = answers[b.blank_id];
+        if(!v){ allAnswered = false; ok = false; }
+        else if(v !== b.answer){
+          ok = false;
+          const primary = b.feedback?.[v] || `“${v}” doesn’t match that role in federation.`;
+          const why = task.rationale || 'SAML provides authentication assertions; OAuth 2.0 handles delegated authorization.';
+          const tip = (b.blank_id === 'authn')
+            ? (b.study_tip || 'Remember: IdP authenticates and asserts identity to the SP.')
+            : (b.study_tip || 'Remember: OAuth scopes/consent = delegated authorization.');
+          msgs.push(buildDeepFeedback({primary, why, tip}));
+        }
+      });
+
+      if(!allAnswered){
+        result.textContent = 'Complete all blanks.';
+        result.className = 'result incorrect';
+        setFeedback(card, 'Select an option for each blank to receive feedback.');
+      } else {
+        result.textContent = ok ? 'Correct ✓' : 'Incorrect ✗';
+        result.className = 'result ' + (ok ? 'correct' : 'incorrect');
+        if(!ok){
+          setFeedback(card, msgs.join(' '));
+          if(details){ details.hidden = false; details.open = false; }
+        }
+      }
+      return;
+    }
+  });
+}
+
+function resetAll(){ userAnswers.clear(); renderAll(); }
+
+/* ---------- Event listeners ---------- */
+window.addEventListener('DOMContentLoaded', ()=>{
+  $('#btnShowJson')?.addEventListener('click', ()=>{
+    const panel = $('#jsonPanel');
+    if(panel) panel.hidden = !panel.hidden;
+  });
+  $('#btnCheck')?.addEventListener('click', checkAnswers);
+  $('#btnReset')?.addEventListener('click', resetAll);
+  $('#btnOriginal')?.addEventListener('click', ()=>{
+    const tag = document.getElementById('pbq-data');
+    if (!tag) return alert('No embedded PBQ found.');
+    try{
+      PBQ = JSON.parse(tag.textContent);
+      userAnswers.clear();
+      renderAll();
+      $('#jsonPanel').hidden = false;
+      $('#jsonOut').textContent = JSON.stringify(PBQ, null, 2);
+    }catch(e){ alert('Original PBQ JSON failed to parse.'); }
+  });
+  $('#fileInput')?.addEventListener('change', async (e)=>{
+    const file = e.target.files?.[0]; if(!file) return;
+    try{
+      const text = await file.text();
+      PBQ = JSON.parse(text);
+      userAnswers.clear();
+      renderAll();
+      $('#jsonPanel').hidden = false;
+      $('#jsonOut').textContent = JSON.stringify(PBQ, null, 2);
+    }catch(err){ alert('Failed to parse JSON: ' + err.message); }
+  });
+
+  // Boot: URL param first, else embedded
+  loadPBQFromURLParam().then(ok => { if(!ok) loadPBQFromScriptTag(); });
+});
+</script>
+
 </body>
 </html>
