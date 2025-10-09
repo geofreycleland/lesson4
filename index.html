@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>PBQ Runner — Lesson 4</title>
+  <title>PBQ Runner — Lesson 4 (Scenario + Tasks)</title>
   <style>
     :root {
       --bg: #f4f6fa;
@@ -78,8 +78,8 @@
       line-height: 1.2;
       text-align: center;
       transition: all 0.15s ease-in-out;
+      text-decoration: none;
     }
-
     .btn:hover { background: #eaf0ff; border-color: var(--accent); }
     .btn.primary { background: var(--accent); color: #fff; border-color: var(--accent); }
     .btn.primary:hover { background: #1f56c4; }
@@ -97,7 +97,7 @@
       box-shadow: 0 2px 6px rgba(0,0,0,0.05);
     }
 
-.pill2 {
+    .pill2 {
       display: inline-block;
       padding: 0.25rem 0.8rem;
       border-radius: 10px;
@@ -121,7 +121,28 @@
 
     .title { font-weight: 700; }
     .muted { color: var(--ink-dim); }
-    .scenario { white-space: pre-wrap; color: #2b2f3c; }
+
+    .scenario-wrap {
+      display: grid;
+      gap: 8px;
+    }
+    .scenario-label {
+      display: inline-block;
+      padding: 0.35rem 0.75rem;
+      border-radius: 999px;
+      background: #ffeef2;
+      border: 1px solid #ffc7d1;
+      color: #b10f2e;
+      font-size: 0.85rem;
+      font-weight: 800;
+      letter-spacing: 0.4px;
+      text-transform: uppercase;
+      width: max-content;
+    }
+    .scenario {
+      white-space: pre-wrap;
+      color: #2b2f3c;
+    }
 
     .task { margin-top: 8px; }
     .task h3 {
@@ -131,18 +152,6 @@
     }
 
     .options { display: grid; gap: 0.4rem; }
-
-    label.option {
-      display: flex;
-      gap: 0.6rem;
-      align-items: flex-start;
-      padding: 0.5rem 0.7rem;
-      border: 1px solid #d6dae5;
-      border-radius: 10px;
-      background: #fafbfe;
-      transition: background 0.15s ease;
-    }
-    label.option:hover { background: #eef3ff; }
 
     .ordering { display: grid; gap: 0.5rem; }
 
@@ -186,8 +195,6 @@
       font-size: 0.95rem;
     }
 
-    details { margin-top: 0.5rem; }
-
     footer {
       max-width: 900px;
       margin: 40px auto 80px;
@@ -196,20 +203,6 @@
       font-size: 0.9rem;
       text-align: center;
     }
-
-    code.json {
-      display: block;
-      white-space: pre;
-      overflow: auto;
-      max-height: 260px;
-      background: #f5f7fc;
-      border: 1px solid #dfe3eb;
-      padding: 10px;
-      border-radius: 12px;
-      color: #1b1f2f;
-    }
-
-    .file { display: none; }
 
     select {
       background: #ffffff;
@@ -238,14 +231,8 @@
 
     <div class="toolbar">
       <div class="toolbar-left">
-        <button class="btn" id="btnShowJson">Show JSON</button>
-
-        <label class="btn" for="fileInput">Load JSON file…</label>
-        <input id="fileInput" class="file" type="file" accept="application/json" />
-
-        <button class="btn" id="btnOriginal">Original PBQ</button>
-        <a class="btn" href="lesson4_practice_questions.html" target="_blank" style="text-decoration:none; color:inherit;">Practice Questions</a>
-        <a class="btn" href="audio_review.html" target="_blank" style="text-decoration:none; color:inherit;">Audio Review</a>
+        <a class="btn" href="lesson4_practice_questions.html" target="_blank">Practice Questions</a>
+        <a class="btn" href="audio_review.html" target="_blank">Audio Review</a>
       </div>
 
       <div class="toolbar-right">
@@ -258,23 +245,55 @@
     <section class="card">
       <div class="title" id="pbq_title">—</div>
       <div class="muted" id="lesson">—</div>
-      <p class="scenario" id="scenario">—</p>
+      <div class="scenario-wrap">
+        <div class="scenario-label">Scenario</div>
+        <p class="scenario" id="scenario">—</p>
+      </div>
       <div class="pill2" id="meta"></div>
     </section>
 
-    <section id="tasks"></section>
-
-    <section class="card" id="jsonPanel" hidden>
-      <div class="title">Current PBQ JSON</div>
-      <code class="json" id="jsonOut"></code>
+    <section id="tasks"></section><!-- =================== NEW PBQ SECTION: Identity & Access Mapping =================== -->
+    <section class="card" id="iam-pbq">
+      <div class="scenario-label" style="background:#eefcf4;border-color:#bfead3;color:#116a3d">PBQ (No Scenario)</div>
+      <h2 style="margin:8px 0 2px">Security+ PBQ: Identity &amp; Access Mapping</h2>
+      <p class="muted" style="margin:0 0 8px">
+        Match each requirement to the <b>Best Protocol/Standard</b> and the <b>Recommended Flow/Mode</b> used in modern IAM. 
+        Then click <em>Check Answers</em>. This is designed to reinforce Lesson 4 topics (SAML, OAuth 2.0, OpenID Connect, Kerberos, RADIUS/802.1X, Conditional Access).
+      </p>
+      <div id="iam-score" class="pill2" aria-live="polite">Score: 0/8</div>
+      <div style="overflow-x:auto;margin-top:10px">
+        <table style="width:100%;border-collapse:separate;border-spacing:0;min-width:760px">
+          <thead>
+            <tr>
+              <th style="text-align:left;padding:10px;border-bottom:1px solid #e2e8f0">Requirement</th>
+              <th style="text-align:left;padding:10px;border-bottom:1px solid #e2e8f0">Best Protocol / Standard</th>
+              <th style="text-align:left;padding:10px;border-bottom:1px solid #e2e8f0">Recommended Flow / Mode</th>
+            </tr>
+          </thead>
+          <tbody id="iam-tbody"></tbody>
+        </table>
+      </div>
+      <details id="iam-feedback" style="margin-top:10px">
+        <summary>Why these mappings?</summary>
+        <div class="answer">
+          Use <b>SAML</b> for web SSO between an IdP (e.g., Azure AD) and enterprise SaaS SPs. 
+          Use <b>OpenID Connect</b> when you need authentication for apps (an identity layer on OAuth 2.0), typically via Authorization Code with PKCE.
+          Use <b>OAuth 2.0</b> to delegate API access (scopes), e.g., server-to-server (Client Credentials) or user-consented access (Auth Code + PKCE). 
+          <b>Kerberos</b> provides ticket-based auth in on‑prem AD. 
+          <b>RADIUS/EAP-TLS</b> is common for 802.1X network access control. 
+          <b>Device Code</b> enables sign-in on devices without an easy browser. 
+          Avoid <b>Implicit</b> and <b>ROPC</b> except legacy edge cases.
+        </div>
+      </details>
     </section>
+
   </main>
 
   <footer>
-    Built for quick study-aid demos. Drop in your own PBQ JSON to render instantly.
+    Built for quick study-aid demos using the embedded Original PBQ.
   </footer>
 
-  <!-- Embedded default PBQ -->
+  <!-- Embedded Original PBQ (default) -->
   <script type="application/json" id="pbq-data">{
     "pbq_title": "The Case of the Missing Login",
     "lesson": "Lesson 4 – Implement Identity and Access Management",
@@ -327,76 +346,14 @@ const $$ = (sel, el=document) => Array.from(el.querySelectorAll(sel));
 let PBQ = null;
 let userAnswers = new Map();
 
-/* ---------- Loaders ---------- */
-async function loadPBQFromURLParam(){
-  const url = new URL(location.href);
-  const pbqFile = url.searchParams.get('pbq');
-  if(!pbqFile) return false;
-  try{
-    const res = await fetch(pbqFile, { cache: 'no-store' });
-    if(!res.ok) throw new Error(res.statusText);
-    PBQ = await res.json();
-    userAnswers.clear();
-    renderAll();
-    const panel = $('#jsonPanel'); if (panel) panel.hidden = false;
-    const out = $('#jsonOut'); if (out) out.textContent = JSON.stringify(PBQ, null, 2);
-    return true;
-  }catch(e){
-    console.error(e);
-    alert('Failed to load PBQ from URL: ' + e.message);
-    return false;
-  }
-}
-
 function loadPBQFromScriptTag(){
-  const fallback = {
-    pbq_title: 'DEMO — Dropdown • MC • Order',
-    lesson: 'Lesson 4 – Implement Identity & Access Management',
-    scenario: 'Built-in demo PBQ. Includes MC, ordering, and dropdown.',
-    tasks: [
-      { task_id: 1, type: 'multiple_choice',
-        prompt: 'Which protocol is commonly used for federated SSO between an IdP and SP?',
-        options: {A:'RADIUS',B:'SAML',C:'SCP',D:'FTP'}, answer:'B',
-        rationale:'The IdP issues assertions the SP validates; SAML standardizes that.',
-        feedback: {A:'RADIUS is AAA to network gear, not web SSO.', C:'SCP is file copy.', D:'FTP is file transfer.'},
-        study_tip:'Sketch IdP ↔ SP and label who authenticates vs who validates.'
-      },
-      { task_id: 2, type: 'ordering',
-        prompt: 'Arrange the SAML flow:',
-        steps: ['User opens SP','SP redirects to IdP','IdP issues signed assertion','SP validates and grants access'],
-        correct_order: [1,2,3,4],
-        study_tip:'Think: SP → IdP → Assertion → Validate.'
-      },
-      { task_id: 3, type: 'fill_in_dropdown',
-        prompt: 'Complete:',
-        sentence: 'In this design, ______ provides authentication assertions, while ______ provides delegated authorization.',
-        blanks: [
-          {blank_id:'b1', choices:['OAuth 2.0','SAML','Kerberos','RADIUS'], answer:'SAML',
-           feedback:{'OAuth 2.0':'OAuth delegates access; not authn assertions.'},
-           study_tip:'Associate SAML with XML assertions and enterprise SSO.'},
-          {blank_id:'b2', choices:['OAuth 2.0','SAML','OpenID Connect','TACACS+'], answer:'OAuth 2.0',
-           feedback:{'SAML':'SAML is authn assertions; OAuth handles delegated access.'},
-           study_tip:'Remember: OAuth scopes/consent = delegated authorization.'}
-        ],
-        rationale:'SAML = authentication assertions; OAuth 2.0 = delegated authorization.'
-      }
-    ],
-    concepts_tested: ['SAML','OAuth 2.0','SSO'],
-    difficulty: 'Easy',
-    estimated_time_minutes: 6
-  };
-
   try{
     const tag = document.getElementById('pbq-data');
-    if(!tag || !tag.textContent.trim()){ PBQ = fallback; renderAll(); return; }
     PBQ = JSON.parse(tag.textContent);
     renderAll();
   }catch(err){
     console.error('Embedded PBQ JSON parse failed:', err);
-    PBQ = fallback; renderAll();
-    const panel = $('#jsonPanel'); if(panel) panel.hidden = false;
-    const out = $('#jsonOut'); if(out) out.textContent = JSON.stringify(PBQ, null, 2);
-    alert('Embedded PBQ JSON failed to load. Loaded demo PBQ instead.');
+    alert('Embedded PBQ JSON failed to load.');
   }
 }
 
@@ -411,56 +368,20 @@ function renderAll(){
   tasksWrap.innerHTML = '';
 
   PBQ.tasks.forEach(task => {
+    if (task.type === 'multiple_choice') return; // REMOVE MC per request
+
     const card = document.createElement('section');
     card.className = 'card task';
     card.dataset.taskId = task.task_id;
 
+    const typeLabel = task.type.replace('_',' ');
     const title = document.createElement('h3');
-    title.textContent = `Task ${task.task_id} — ${task.type.replace('_',' ')}`;
+    title.textContent = `Task ${task.task_id} — Reference the Scenario: ${typeLabel}`;
     card.appendChild(title);
 
     const prompt = document.createElement('p');
-    prompt.textContent = task.prompt;
+    prompt.textContent = `Reference the Scenario above: ${task.prompt}`;
     card.appendChild(prompt);
-
-    if(task.type === 'multiple_choice'){
-      const opts = document.createElement('div');
-      opts.className = 'options';
-      Object.entries(task.options).forEach(([k,v])=>{
-        const id = `t${task.task_id}_${k}`;
-        const label = document.createElement('label');
-        label.className = 'option';
-        label.htmlFor = id;
-
-        const input = document.createElement('input');
-        input.type = 'radio';
-        input.name = `mc_${task.task_id}`;
-        input.id = id;
-        input.value = k;
-        input.addEventListener('change', ()=>{
-          userAnswers.set(task.task_id, {choice:k});
-        });
-
-        const span = document.createElement('span');
-        span.textContent = `${k}. ${v}`;
-
-        label.appendChild(input);
-        label.appendChild(span);
-        opts.appendChild(label);
-      });
-      card.appendChild(opts);
-
-      const result = document.createElement('div');
-      result.className = 'result';
-      card.appendChild(result);
-
-      const details = document.createElement('details');
-      const sum = document.createElement('summary'); sum.textContent = 'Rationale';
-      const ans = document.createElement('div'); ans.className = 'answer'; ans.textContent = task.rationale || '';
-      details.appendChild(sum); details.appendChild(ans);
-      details.hidden = true;             // hidden until wrong
-      card.appendChild(details);
-    }
 
     if(task.type === 'ordering'){
       const list = document.createElement('div'); list.className = 'ordering';
@@ -480,7 +401,7 @@ function renderAll(){
       const details = document.createElement('details');
       const sum = document.createElement('summary'); sum.textContent = 'Rationale';
       const ans = document.createElement('div'); ans.className = 'answer';
-      ans.textContent = task.correct_order.map(i=>task.steps[i-1]).join(' → ');
+      ans.textContent = task.correct_order.map(i=>task.steps[i-1]).join(' \u2192 ');
       details.appendChild(sum); details.appendChild(ans);
       details.hidden = true;             // hidden until wrong
       card.appendChild(details);
@@ -522,8 +443,6 @@ function renderAll(){
 
     tasksWrap.appendChild(card);
   });
-
-  $('#jsonOut').textContent = JSON.stringify(PBQ, null, 2);
 }
 
 /* ---------- Drag + order helpers ---------- */
@@ -598,40 +517,20 @@ function buildDeepFeedback({primary, why, tip}){
 /* ---------- Grading ---------- */
 function checkAnswers(){
   PBQ.tasks.forEach(task=>{
+    if (task.type === 'multiple_choice') return; // MC removed
+
     const card = document.querySelector(`.task[data-task-id="${task.task_id}"]`);
-    const result = $('.result', card);
-    const details = $('details', card);
+    const result = card.querySelector('.result');
+    const details = card.querySelector('details');
     if(result) result.textContent = '';
     if(details) details.hidden = true;
     setFeedback(card, '');
 
-    if(task.type === 'multiple_choice'){
-      const user = userAnswers.get(task.task_id)?.choice;
-      if(!user){
-        result.textContent = 'No answer selected.';
-        result.className = 'result incorrect';
-        setFeedback(card, 'Choose an option to see feedback.');
-        return;
-      }
-      const ok = user === task.answer;
-      result.textContent = ok ? `Correct ✓ (${user})` : `Incorrect ✗ (you chose ${user})`;
-      result.className = 'result ' + (ok ? 'correct' : 'incorrect');
-
-      if(!ok){
-        const primary = task.feedback?.[user] || 'That option doesn’t match the federation model described.';
-        const why = task.rationale || 'The IdP issues assertions that the SP validates; SAML standardizes that exchange.';
-        const tip = task.study_tip || 'Sketch the IdP ↔ SP flow and label who authenticates vs who authorizes.';
-        setFeedback(card, buildDeepFeedback({primary, why, tip}));
-        if(details){ details.hidden = false; details.open = false; }
-      }
-      return;
-    }
-
     if(task.type === 'ordering'){
       let order = userAnswers.get(task.task_id)?.order;
       if(!order){
-        const list = $('.ordering', card);
-        order = $$('.draggable', list).map(d=>Number(d.dataset.index));
+        const list = card.querySelector('.ordering');
+        order = Array.from(list.querySelectorAll('.draggable')).map(d=>Number(d.dataset.index));
       }
       const ok = JSON.stringify(order) === JSON.stringify(task.correct_order);
       const yours = summarizeInline(order, task.steps);
@@ -658,7 +557,7 @@ function checkAnswers(){
       let answers = userAnswers.get(task.task_id);
       if(!answers){
         answers = {};
-        const selects = $$('select[data-blank-id]', card);
+        const selects = card.querySelectorAll('select[data-blank-id]');
         selects.forEach(s => answers[s.dataset.blankId] = s.value);
       }
       let allAnswered = true;
@@ -700,42 +599,138 @@ function resetAll(){ userAnswers.clear(); renderAll(); }
 
 /* ---------- Event listeners ---------- */
 window.addEventListener('DOMContentLoaded', ()=>{
-  $('#btnShowJson')?.addEventListener('click', ()=>{
-    const panel = $('#jsonPanel');
-    if(panel) panel.hidden = !panel.hidden;
-  });
-  $('#btnCheck')?.addEventListener('click', checkAnswers);
-  $('#btnReset')?.addEventListener('click', resetAll);
-  $('#btnOriginal')?.addEventListener('click', ()=>{
-    const tag = document.getElementById('pbq-data');
-    if (!tag) return alert('No embedded PBQ found.');
-    try{
-      PBQ = JSON.parse(tag.textContent);
-      userAnswers.clear();
-      renderAll();
-      $('#jsonPanel').hidden = false;
-      $('#jsonOut').textContent = JSON.stringify(PBQ, null, 2);
-    }catch(e){ alert('Original PBQ JSON failed to parse.'); }
-  });
-  $('#fileInput')?.addEventListener('change', async (e)=>{
-    const file = e.target.files?.[0]; if(!file) return;
-    try{
-      const text = await file.text();
-      PBQ = JSON.parse(text);
-      userAnswers.clear();
-      renderAll();
-      $('#jsonPanel').hidden = false;
-      $('#jsonOut').textContent = JSON.stringify(PBQ, null, 2);
-    }catch(err){ alert('Failed to parse JSON: ' + err.message); }
-  });
+  document.getElementById('btnCheck')?.addEventListener('click', checkAnswers);
+  document.getElementById('btnReset')?.addEventListener('click', resetAll);
 
-  // Boot: URL param first, else embedded
-  loadPBQFromURLParam().then(ok => { if(!ok) loadPBQFromScriptTag(); });
+  // Boot with embedded Original PBQ only
+  loadPBQFromScriptTag();
 });
+
+
+
+/* ---------- IAM PBQ (table) ---------- */
+const IAM_ROWS = [
+  {req: "Single sign-on from Azure AD to Salesforce (browser-based enterprise SSO)",
+   proto: "SAML", flow: "SP-initiated SAML",
+   why: "Enterprise web SSO typically uses SAML between IdP and SaaS SP; SP-initiated is common."},
+  {req: "Native mobile app needs user sign-in and an ID token for the UI",
+   proto: "OpenID Connect", flow: "Authorization Code (PKCE)",
+   why: "OIDC provides ID tokens; Authorization Code with PKCE is recommended for public clients."},
+  {req: "Server-to-server job needs access to a calendar API (no user present)",
+   proto: "OAuth 2.0", flow: "Client Credentials",
+   why: "Machine-to-machine calls use OAuth 2.0 client credentials with app roles/scopes."},
+  {req: "Windows domain logon on the corporate LAN",
+   proto: "Kerberos", flow: "Ticket-based (Kerberos)",
+   why: "On‑prem AD integrated authentication relies on Kerberos tickets."},
+  {req: "Company laptops authenticate to enterprise Wi‑Fi with certificates",
+   proto: "RADIUS", flow: "EAP-TLS (802.1X)",
+   why: "802.1X commonly uses RADIUS with EAP‑TLS for certificate-based network access control."},
+  {req: "Smart TV app asks you to sign in using your phone (no keyboard)",
+   proto: "OpenID Connect", flow: "Device Code",
+   why: "Device Code flow supports limited-input devices; OIDC supplies ID tokens."},
+  {req: "After sign-in, a web app needs to call the user’s mailbox API",
+   proto: "OAuth 2.0", flow: "Authorization Code (PKCE)",
+   why: "Use OAuth 2.0 Auth Code + PKCE to obtain access tokens with the right scopes."},
+  {req: "A partner IdP launches SSO directly into your internal app",
+   proto: "SAML", flow: "IdP-initiated SAML",
+   why: "B2B federation frequently supports IdP‑initiated SAML from partner IdPs."}
+];
+
+const IAM_PROTOCOLS = ["SAML","OpenID Connect","OAuth 2.0","Kerberos","RADIUS"];
+const IAM_FLOWS = [
+  "Authorization Code (PKCE)",
+  "Client Credentials",
+  "Implicit (legacy)",
+  "IdP-initiated SAML",
+  "SP-initiated SAML",
+  "Ticket-based (Kerberos)",
+  "EAP-TLS (802.1X)",
+  "Device Code",
+  "Resource Owner Password (legacy)"
+];
+
+let IAM_ORDER = []; // maps visible row index -> IAM_ROWS index
+
+function shuffleArray(a){
+  for(let i=a.length-1;i>0;i--){
+    const j = Math.floor(Math.random()*(i+1));
+    [a[i],a[j]] = [a[j],a[i]];
+  }
+  return a;
+}
+
+function renderIAMPBQ(doShuffle=true){
+  const tbody = document.getElementById('iam-tbody'); if(!tbody) return;
+  // build order
+  IAM_ORDER = [...Array(IAM_ROWS.length).keys()];
+  if(doShuffle) shuffleArray(IAM_ORDER);
+  tbody.innerHTML = '';
+  IAM_ORDER.forEach((rowIdx, visIdx)=>{
+    const row = IAM_ROWS[rowIdx];
+    const tr = document.createElement('tr');
+    tr.innerHTML = `
+      <td style="padding:10px;border-bottom:1px solid #eef2f7">${row.req}</td>
+      <td style="padding:10px;border-bottom:1px solid #eef2f7">
+        <select data-vis="${visIdx}" data-kind="proto">
+          <option value="" disabled selected>--Select--</option>
+          ${IAM_PROTOCOLS.map(p=>`<option value="${p}">${p}</option>`).join('')}
+        </select>
+      </td>
+      <td style="padding:10px;border-bottom:1px solid #eef2f7">
+        <select data-vis="${visIdx}" data-kind="flow">
+          <option value="" disabled selected>--Select--</option>
+          ${IAM_FLOWS.map(f=>`<option value="${f}">${f}</option>`).join('')}
+        </select>
+        <div class="feedback" data-fb="${visIdx}" hidden></div>
+      </td>`;
+    tbody.appendChild(tr);
+  });
+  const score = document.getElementById('iam-score'); if(score) score.textContent = `Score: 0/${IAM_ROWS.length}`;
+}
+
+function gradeIAMPBQ(){
+  let correct = 0;
+  document.querySelectorAll('#iam-tbody .feedback').forEach(el=>{ el.hidden = true; el.textContent=''; });
+  IAM_ORDER.forEach((rowIdx, visIdx)=>{
+    const row = IAM_ROWS[rowIdx];
+    const protoSel = document.querySelector(`select[data-vis="${visIdx}"][data-kind="proto"]`);
+    const flowSel  = document.querySelector(`select[data-vis="${visIdx}"][data-kind="flow"]`);
+    const fb = document.querySelector(`.feedback[data-fb="${visIdx}"]`);
+    let ok = true; const msgs = [];
+    if(!protoSel || !flowSel){ ok=false; msgs.push("Missing selection."); }
+    else {
+      if(protoSel.value !== row.proto){ ok=false; msgs.push(`Protocol should be ${row.proto}.`); }
+      if(flowSel.value !== row.flow){ ok=false; msgs.push(`Flow/mode should be ${row.flow}.`); }
+    }
+    if(ok){ correct += 1; } else { fb.hidden = false; fb.textContent = `${msgs.join(' ')} Why: ${row.why}`; }
+  });
+  const score = document.getElementById('iam-score'); if(score) score.textContent = `Score: ${correct}/${IAM_ROWS.length}`;
+}
+
+/* Robust init: render immediately if DOM is ready, add hooks */
+(function initIAM(){
+  function initNow(){
+    renderIAMPBQ(true); // initial shuffle
+    const checkBtn = document.getElementById('btnCheck');
+    if(checkBtn){
+      const prev = checkBtn.onclick;
+      checkBtn.onclick = (e)=>{ if(prev) prev.call(checkBtn, e); gradeIAMPBQ(); };
+    }
+    const resetBtn = document.getElementById('btnReset');
+    if(resetBtn){
+      const prevR = resetBtn.onclick;
+      resetBtn.onclick = (e)=>{
+        if(prevR) prevR.call(resetBtn, e);
+        renderIAMPBQ(true); // reshuffle on reset
+      };
+    }
+  }
+  if (document.readyState !== 'loading') { initNow(); }
+  else { window.addEventListener('DOMContentLoaded', initNow); }
+})();
 </script>
+
+
 
 </body>
 </html>
-
-
-
